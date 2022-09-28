@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TableController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +41,10 @@ Route::middleware([
     Route::delete('/produtos/{product}', [ProductController::class, 'destroy']);
 
     // MESAS
-    Route::get('/mesas', function () {
-        return view('mesas');
-    })->name('mesas');
+    Route::get('/mesas', [TableController::class, 'index'])->name('produtos');
+    Route::post('/mesas', [TableController::class, 'store']);
+    Route::post('/mesas/{table}', [TableController::class, 'update']);
+    Route::delete('/mesas/{table}', [TableController::class, 'destroy']);
 
     // COZINHA
     Route::get('/cozinha', function () {
