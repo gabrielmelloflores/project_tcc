@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\ComandaController;
 
 
 /*
@@ -30,9 +31,8 @@ Route::middleware([
     })->name('dashboard');
 
     // COMANDA
-    Route::get('/comanda', function () {
-        return view('comanda');
-    })->name('comanda');
+    Route::get('/comanda', [ComandaController::class, 'index'])->name('comanda');
+    Route::post('/comanda', [ComandaController::class, 'store']);
     
     // PRODUTOS
     Route::get('/produtos', [ProductController::class, 'index'])->name('produtos');

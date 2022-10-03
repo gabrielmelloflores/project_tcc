@@ -16,7 +16,6 @@ class ProductController extends Controller
 
     public function store()
     {
-        $this->validateProduct();
         Product::create(array_merge($this->validateProduct(), [
             'acitve' => 1,
         ]));

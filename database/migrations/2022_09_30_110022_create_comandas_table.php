@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('comandas', function (Blueprint $table) {
             $table->id();
-            $table->integer('number')->unique();
-            $table->integer('seats');
-            $table->integer('anexo')->nullable();
-            $table->boolean('active');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('table_id');
+            $table->timestamp('dt_entrega')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('comanda');
     }
 };
