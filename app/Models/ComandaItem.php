@@ -11,10 +11,10 @@ class ComandaItem extends Model
     protected $fillable = ['comanda_id','product_id','quantity'];
 
     public function comanda() {
-        return $this->belongsTo(Comanda::class);
+        return $this->belongsTo(Comanda::class, 'comanda_id');
     }
 
     public function product() {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

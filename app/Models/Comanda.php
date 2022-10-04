@@ -9,7 +9,7 @@ class Comanda extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','table_id'];
-    protected $with = ['table', 'waiter'];
+    protected $with = ['table', 'waiter', 'itens'];
 
     public function table(){
         //hasOne, hasMany, belongsTo, belongsToMany
@@ -19,5 +19,10 @@ class Comanda extends Model
     public function waiter(){
         //hasOne, hasMany, belongsTo, belongsToMany
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function itens(){
+        //hasOne, hasMany, belongsTo, belongsToMany
+        return $this->hasMany(ComandaItem::class);
     }
 }

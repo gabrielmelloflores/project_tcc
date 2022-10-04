@@ -26,6 +26,9 @@
                         <div class="col-md-8" style="display:contents;">
                         <div class="card-body" style="min-width:100px;">
                             <p class="card-title"><i class="fa-sharp fa-regular fa-circle-user"></i> {{ $table->seats }}</p>
+                            @if($table->anexo)
+                                <p><i class="fa-solid fa-link"></i> {{ $table->anexo }}</p>
+                            @endif
                         </div>
                         </div>
                     </div>

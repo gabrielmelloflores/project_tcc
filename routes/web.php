@@ -33,6 +33,8 @@ Route::middleware([
     // COMANDA
     Route::get('/comanda', [ComandaController::class, 'index'])->name('comanda');
     Route::post('/comanda', [ComandaController::class, 'store']);
+    Route::get('/comanda/{comanda}', [ComandaController::class, 'edit']);
+    Route::post('/comanda/{comanda}', [ComandaController::class, 'update']);
     
     // PRODUTOS
     Route::get('/produtos', [ProductController::class, 'index'])->name('produtos');

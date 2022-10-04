@@ -77,7 +77,7 @@
                                     </div>
                                     <div style="margin-left:100px;display: inline-flex;">
                                         <label>Anexar Mesa</label>
-                                        <button style="margin-left:5px;" type="button" class="addMesa" class="btn btn-success">+</button>
+                                        <button style="margin-left:5px;" type="button" class="addMesa btn btn-success">+</button>
                                         <div style="margin-left:10px" id="boxMesa"></div>
                                     </div>
                                 </div>           
@@ -205,86 +205,24 @@
             </div>
 
         <script>
-            @foreach ($comandas as $comanda) {
+            @foreach ($comandas as $comanda) 
                 $('#comanda'+{{ $comanda->id }}).click(function(){
                     $('#editComandaModal').modal('show');
                     $('#editComandaModal #waiter').html("{{ $comanda->waiter->name }}");
                     $('#editComandaModal #mesa').val({{ $comanda->table_id }});
-                    
-                    @foreach ($comandaItens as $comandaItem)
-                        if({{$comanda->id}} == {{$comandaItem->comanda_id}}) {
-                            @foreach ($products as $product)
-                                if({{ $comandaItem->product_id }} == {{ $product->id }}){
-                                    var html = "<tr row='{{ $product->id }}'>"
-                                            +     "<th> <input type='text' class='hidden' name='product_id{{ $product->id }}' value='{{ $product->id }}'></input>{{ $product->name }} </th>"
-                                            +     "<td> R$ {{ $product->value }}</td>"
-                                            +     "<td> <input class='quant' valor='{{ $product->value }}' style='width: 100px;' type='number' name='quantity{{ $product->id }}' class='form-control' value='{{ $comandaItem->quantity }}'></td>"
-                                            +     "<td> <span id='valor{{ $product->id }}' >R$ <span>"+parseInt({{ $product->value }}) * parseInt({{ $comandaItem->quantity }})+"</span></span> </td>"
-                                            + "</tr>"
-                                }
-                            @endforeach
-                            $('#editComandaModal #tableProdutos tbody').prepend(html);
-                        }
+                    @foreach ($comanda->itens as $item)
+                            var html = "<tr row='{{ $item->product->id }}'>"
+                                    +     "<th> <input type='text' class='hidden' name='product_id{{ $item->product->id }}' value='{{ $item->product->id }}'></input>{{ $item->product->name }} </th>"
+                                    +     "<td> R$ {{ $item->product->value }}</td>"
+                                    +     "<td> <input class='quant' valor='{{$item->product->value }}' style='width: 100px;' type='number' name='quantity{{ $item->product->id }}' class='form-control' value='{{ $item->quantity }}'></td>"
+                                    +     "<td> <span id='valor{{ $item->product->id }}' >R$ <span>"+parseInt({{ $item->product->value }}) * parseInt({{ $item->quantity }})+"</span></span> </td>"
+                                    + "</tr>"
+                        $('#editComandaModal #tableProdutos tbody').prepend(html);
                     @endforeach
-                    $('.quant').unbind();
-                    $('.quant').change(function(){
-                        var soma = 0;
-                        var quantidade = $(this).val();
-                        var valor = $(this).attr('valor');
-                        var tr = $(this).closest('tr').attr('row');   
-                        $('#valor'+tr).html("R$ <span>"+quantidade * valor+"</span>");     
-                        $('tbody tr td:last-child span span').each(function( index ) {
-                            soma += parseFloat($(this)[0].innerText);
-                        });
-                        $('#total').html('R$ '+soma);
-                    })
-                    $('.quant').trigger("change");
-                    })
-                }
+                });
             @endforeach
-            $('.addProduto').click(function(){
-                @foreach ($products as $product)
-                    if($('#selectProduto').val() == {{ $product->id }}){
-                        var html = "<tr row='{{ $product->id }}'>"
-                                   +     "<th> <input type='text' class='hidden' name='product_id{{ $product->id }}' value='{{ $product->id }}'></input>{{ $product->name }} </th>"
-                                   +     "<td> R$ {{ $product->value }}</td>"
-                                   +     "<td> <input class='quant' valor='{{ $product->value }}' style='width: 100px;' type='number' name='quantity{{ $product->id }}' class='form-control' value='1'></td>"
-                                   +     "<td> <span id='valor{{ $product->id }}' >R$ <span>{{ $product->value }}</span></span> </td>"
-                                   + "</tr>"
-                    }
-                @endforeach
-                $('#tableProdutos tbody').prepend(html);
-                $('.quant').unbind();
-                $('.quant').change(function(){
-                    var soma = 0;
-                    var quantidade = $(this).val();
-                    var valor = $(this).attr('valor');
-                    var tr = $(this).closest('tr').attr('row');   
-                    $('#valor'+tr).html("R$ <span>"+quantidade * valor+"</span>");     
-                    $('tbody tr td:last-child span span').each(function( index ) {
-                        soma += parseFloat($(this)[0].innerText);
-                    });
-                    $('#total').html('R$ '+soma);
-                })
-                $('.quant').trigger("change");
-            });
 
-            $('.addMesa').click(function(){
-
-                if ($('#boxMesa select:last-child').attr('mesa') != undefined){
-                    var mesa = parseInt($('#boxMesa select:last-child').attr('mesa'))+1;
-                }else{
-                    var mesa = 0;
-                }
-                var html = '<select style="margin-left:5px" name="table_id'+mesa+'" mesa="'+mesa+'" class="form-select">'
-                        +'    @foreach ($tables as $table)'
-                        +'        <option value="{{ $table->id }}">{{ $table->number }}</option>'
-                        +'    @endforeach'
-                        +'</select>';
-
-                $('#boxMesa').append(html);
-
-            });
+            
 
         </script>
 

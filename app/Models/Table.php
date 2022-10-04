@@ -11,4 +11,9 @@ class Table extends Model
 
     protected $fillable = ['number', 'seats', 'anexo','active'];
 
+    public function anexos(){
+        //hasOne, hasMany, belongsTo, belongsToMany
+        return $this->hasMany(Table::class, 'anexo');
+    }
+
 }
