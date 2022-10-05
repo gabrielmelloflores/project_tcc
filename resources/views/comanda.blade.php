@@ -12,6 +12,7 @@
             </div>
             <div class="m-3">
             @foreach ($comandas as $comanda)
+            <a href="/comanda/{{ $comanda->id }}">
                 <div id="comanda{{ $comanda->id }}" class="p-3 md:w-1/3 flex flex-col flex-grow flex-shrink inline-flex" style="width: 300px;cursor:pointer;">
                     <div style="box-shadow: 0px 8px 33px -2px rgb(0 0 0/ 53%);">
                         <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
@@ -49,6 +50,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             @endforeach
             </div>
 

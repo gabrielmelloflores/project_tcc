@@ -9,98 +9,98 @@
         <x-slot name="content">
 
             <div class="m-3">
-            <form method="POST" action="/comanda/{{$comanda->id}}" enctype="multipart/form-data">
-                            @csrf
+                <form method="POST" action="/comanda/{{$comanda->id}}" enctype="multipart/form-data">
+                    @csrf
 
-                            <div class="modal-header" style="padding:0px">
-                                <a href="../comanda"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                                <h4 class="modal-title">Comanda - {{ $comanda->id }}</h4>
+                    <div class="modal-header" style="padding:0px">
+                        <a href="../comanda"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                        <h4 class="modal-title">Comanda - {{ $comanda->id }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" id="waiter">
+                            {{ $comanda->waiter->name }}
+                        </div>
+
+                        <div class="form-group" style="display:flex;">
+                            <div style=" align-self: center; ">
+                                <label>Mesa</label>
+                                <select id="mesa" name="table_id" class="form-select">
+                                    @foreach ($tables as $table)
+                                        <option value="{{ $table->id }}">{{ $table->number }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group" id="waiter">
-                                    {{ $comanda->waiter->name }}
-                                </div>
-
-                                <div class="form-group" style="display:flex;">
-                                    <div style=" align-self: center; ">
-                                        <label>Mesa</label>
-                                        <select id="mesa" name="table_id" class="form-select">
-                                            @foreach ($tables as $table)
-                                                <option value="{{ $table->id }}">{{ $table->number }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div style="margin-left:100px;display: block;">
-                                        <label>Anexar Mesa</label>
-                                        <button style="margin-left:5px;" type="button" class="addMesa btn btn-success">+</button>
-                                        <div style="display:inline-flex" id="boxMesa">
-                                            @foreach($comanda->table->anexos as $anexo)
-                                                <div style="margin-left:10px" class="card">
-                                                    <div class="card-body">
-                                                    {{$anexo->id}}
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                            <div style="margin-left:100px;display: block;">
+                                <label>Anexar Mesa</label>
+                                <button style="margin-left:5px;" type="button" class="addMesa btn btn-success">+</button>
+                                <div style="display:inline-flex" id="boxMesa">
+                                    @foreach($comanda->table->anexos as $anexo)
+                                        <div style="margin-left:10px" class="card">
+                                            <div class="card-body">
+                                            {{$anexo->id}}
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>           
-                                <div class="form-group">
-                                    <h4>Pedido</h4>
-
-                                    <table id="tableProdutos" class="table table-striped">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope = "col"> Produto </th>
-                                                <th scope = "col"> Preço </th>
-                                                <th scope = "col"> Quantidade </th>
-                                                <th scope = "col"> Total </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($comanda->itens as $item)
-                                            <tr row='{{ $item->product->id }}'>
-                                               <th> <input type='text' class='hidden' name='product_id{{ $item->product->id }}' value='{{ $item->product->id }}'></input>{{ $item->product->name }} </th>
-                                               <td> R$ {{ $item->product->value }}</td>
-                                               <td valor="{{ $item->product->value }}"> 
-                                                    <button type="button" style=" font-size: 10px; padding: 5px; margin-right: 5px;" class="menosQuant quant btn btn-danger"><i class="fa-solid fa-minus"></i></button>
-                                                    <input style=" background-color: transparent; width: 50px; " type="text" id="quantidade{{ $item->product->id }}" name="quantity{{ $item->product->id }}" value="{{ $item->quantity }}"></input>
-                                                    <button type="button" style=" font-size: 10px; padding: 5px; margin-left: 5px;" class="maisQuant quant btn btn-success"><i class="fa-solid fa-plus"></i></button>
-                                                </td>
-                                               <td> <span id='valor{{ $item->product->id }}' >R$ <span> 
-                                                @php echo($item->product->value * $item->quantity); @endphp
-                                            </span></span> </td>
-                                            </tr>
-                                        @endforeach
-                                            <tr>
-                                                <th> 
-                                                    <select id="selectProduto" class="form-select">
-                                                        @foreach ($products as $product)
-                                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                                        @endforeach
-                                                    </select> 
-                                                </th>
-                                                <td> <button type="button" class="btn btn-success addProduto">Add Produto</button></td>
-                                                <td> </td>
-                                                <td> </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot style="background-color: #ddd;">
-                                            <tr>
-                                                <th scope = "col" >Total</th>
-                                                <td scope = "col">  </td>
-                                                <td scope = "col">  </td>
-                                                <td id="total" scope = "col"> R$ 0,00 </td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-
+                                    @endforeach
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                                <button class="btn btn-success">Salvar</button>
-                            </div>
-                        </form>                
+                        </div>           
+                        <div class="form-group">
+                            <h4>Pedido</h4>
+
+                            <table id="tableProdutos" class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope = "col"> Produto </th>
+                                        <th scope = "col"> Preço </th>
+                                        <th scope = "col"> Quantidade </th>
+                                        <th scope = "col"> Total </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($comanda->itens as $item)
+                                    <tr row='{{ $item->product->id }}'>
+                                        <th> <input type='text' class='hidden' name='product_id{{ $item->product->id }}' value='{{ $item->product->id }}'></input>{{ $item->product->name }} </th>
+                                        <td> R$ {{ $item->product->value }}</td>
+                                        <td valor="{{ $item->product->value }}"> 
+                                            <button type="button" style=" font-size: 10px; padding: 5px; margin-right: 5px;" class="menosQuant quant btn btn-danger"><i class="fa-solid fa-minus"></i></button>
+                                            <input style=" background-color: transparent; width: 50px; " type="text" id="quantidade{{ $item->product->id }}" name="quantity{{ $item->product->id }}" value="{{ $item->quantity }}"></input>
+                                            <button type="button" style=" font-size: 10px; padding: 5px; margin-left: 5px;" class="maisQuant quant btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                                        </td>
+                                        <td> <span id='valor{{ $item->product->id }}' >R$ <span> 
+                                        @php echo($item->product->value * $item->quantity); @endphp
+                                    </span></span> </td>
+                                    </tr>
+                                @endforeach
+                                    <tr>
+                                        <th> 
+                                            <select id="selectProduto" class="form-select">
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                @endforeach
+                                            </select> 
+                                        </th>
+                                        <td> <button type="button" class="btn btn-success addProduto">Add Produto</button></td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot style="background-color: #ddd;">
+                                    <tr>
+                                        <th scope = "col" >Total</th>
+                                        <td scope = "col">  </td>
+                                        <td scope = "col">  </td>
+                                        <td id="total" scope = "col"> R$ 0,00 </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <button class="btn btn-success">Salvar</button>
+                    </div>
+                </form>                
             </div>
             <script>
 

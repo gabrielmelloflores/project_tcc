@@ -69,8 +69,8 @@ class ComandaController extends Controller
                 unset($request['product_id'.substr($key,10)]);
                 $request['quantity'] = $request['quantity'.substr($key,10)];
                 unset($request['quantity'.substr($key,10)]);
-               
-                ComandaItem::create(array_merge($request, ['comanda_id' => $idComanda]));
+            //    dd($request);
+                ComandaItem::create(array_merge($request, ['comanda_id' => $comanda->id]));
             
             }
         
