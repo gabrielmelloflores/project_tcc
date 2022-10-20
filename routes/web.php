@@ -31,10 +31,13 @@ Route::middleware([
     })->name('dashboard');
 
     // COMANDA
+    Route::get('/comanda/create', [ComandaController::class, 'create']);
     Route::get('/comanda', [ComandaController::class, 'index'])->name('comanda');
     Route::post('/comanda', [ComandaController::class, 'store']);
     Route::get('/comanda/{comanda}', [ComandaController::class, 'edit']);
     Route::post('/comanda/{comanda}', [ComandaController::class, 'update']);
+    Route::delete('/comanda/{comanda}', [ComandaController::class, 'destroy']);
+
     
     // PRODUTOS
     Route::get('/produtos', [ProductController::class, 'index'])->name('produtos');

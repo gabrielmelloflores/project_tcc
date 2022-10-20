@@ -9,16 +9,16 @@
         <x-slot name="content">
 
             <div class="m-3">
-                <form method="POST" action="/comanda/{{$comanda->id}}" enctype="multipart/form-data">
+                <form method="POST" action="/comanda" enctype="multipart/form-data">
                     @csrf
 
                     <div class="modal-header" style="padding:0px">
                         <a href="../comanda"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                        <h4 class="modal-title">Comanda - {{ $comanda->id }}</h4>
+                        <h4 class="modal-title">Comanda</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group" id="waiter">
-                            {{ $comanda->waiter->name }}
+                            {{ Auth::user()->name }}
                         </div>
 
                         <div class="form-group" style="display:flex;">
@@ -34,13 +34,6 @@
                                 <label>Anexar Mesa</label>
                                 <button style="margin-left:5px;" type="button" class="addMesa btn btn-success">+</button>
                                 <div style="display:inline-flex" id="boxMesa">
-                                    @foreach($comanda->table->anexos as $anexo)
-                                        <div style="margin-left:10px" class="card">
-                                            <div class="card-body">
-                                            {{$anexo->id}}
-                                            </div>
-                                        </div>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>           
@@ -57,20 +50,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($comanda->itens as $item)
-                                    <tr row='{{ $item->product->id }}'>
-                                        <th> <input type='text' class='hidden' name='product_id{{ $item->product->id }}' value='{{ $item->product->id }}'></input>{{ $item->product->name }} </th>
-                                        <td> R$ {{ $item->product->value }}</td>
-                                        <td valor="{{ $item->product->value }}"> 
-                                            <button type="button" style=" font-size: 10px; padding: 5px; margin-right: 5px;" class="menosQuant quant btn btn-danger"><i class="fa-solid fa-minus"></i></button>
-                                            <input style=" background-color: transparent; width: 50px; " type="text" id="quantidade{{ $item->product->id }}" name="quantity{{ $item->product->id }}" value="{{ $item->quantity }}"></input>
-                                            <button type="button" style=" font-size: 10px; padding: 5px; margin-left: 5px;" class="maisQuant quant btn btn-success"><i class="fa-solid fa-plus"></i></button>
-                                        </td>
-                                        <td> <span id='valor{{ $item->product->id }}' >R$ <span> 
-                                        @php echo($item->product->value * $item->quantity); @endphp
-                                    </span></span> </td>
-                                    </tr>
-                                @endforeach
                                     <tr>
                                         <th> 
                                             <select id="selectProduto" class="form-select">
@@ -97,18 +76,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form method="POST" action="/comanda/{{ $comanda->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-primary">Encerrar Comanda</button>
-                        </form>
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                         <button class="btn btn-success">Salvar</button>
                     </div>
                 </form>                
             </div>
             <script>
-
                 function alteraQuant(){
                     $('.maisQuant').click(function(){
                         var tr = $(this).closest('tr').attr('row');
@@ -136,8 +109,6 @@
                 };
 
                 $(document).ready(function(){
-                    $('#mesa').val({{ $comanda->table->id }});
-
                     alteraQuant();
                     alteraTotais();
                 });

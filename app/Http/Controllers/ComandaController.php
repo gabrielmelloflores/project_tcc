@@ -20,6 +20,16 @@ class ComandaController extends Controller
         ]);
     }
 
+    public function create(Comanda $comanda)
+    {
+        return view('new',[
+            'comandas' => Comanda::all(),
+            'tables' => Table::all(),
+            'products' => Product::all(),
+            'comandaItens' => ComandaItem::all()
+        ]);
+    }
+
     public function edit(Comanda $comanda)
     {
         return view('comandaEdit', [
@@ -69,7 +79,13 @@ class ComandaController extends Controller
                 unset($request['product_id'.substr($key,10)]);
                 $request['quantity'] = $request['quantity'.substr($key,10)];
                 unset($request['quantity'.substr($key,10)]);
-            //    dd($request);
+                $file = ComandaItem::where([
+                    ['product_id', '=', $request["product_id"]],
+                    ['comanda_id', '=', $comanda->id],
+                ])->first();
+                if($file) {
+                    $file->delete();
+                }
                 ComandaItem::create(array_merge($request, ['comanda_id' => $comanda->id]));
             
             }
@@ -79,6 +95,18 @@ class ComandaController extends Controller
         return redirect('/comanda');
     }
 
+    public function destroy(Comanda $comanda)
+    {
+        $produtos = ComandaItem::where([
+            ['comanda_id', '=', $comanda->id],
+        ]);
+        $produtos->delete();
+
+        $comanda->delete();
+        return redirect('/comanda');
+
+    }
+    
     public function store()
     {
 
@@ -124,7 +152,7 @@ class ComandaController extends Controller
         
         }
 
-        return redirect('/comanda');
+        return redirect('/comanda/'.$idComanda);
 
     }
 
