@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\ComandaController;
+use App\Http\Controllers\KitchenController;
+
 
 
 /*
@@ -27,7 +29,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('comanda');
     })->name('dashboard');
 
     // COMANDA
@@ -52,7 +54,6 @@ Route::middleware([
     Route::delete('/mesas/{table}', [TableController::class, 'destroy']);
 
     // COZINHA
-    Route::get('/cozinha', function () {
-        return view('cozinha');
-    })->name('cozinha');
+    Route::get('/cozinha', [KitchenController::class, 'index'])->name('cozinha');
+
 });

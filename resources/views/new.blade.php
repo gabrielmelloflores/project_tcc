@@ -46,6 +46,7 @@
                                         <th scope = "col"> Produto </th>
                                         <th scope = "col"> Preço </th>
                                         <th scope = "col"> Quantidade </th>
+                                        <th scope = "col"> Entregue </th>
                                         <th scope = "col"> Total </th>
                                     </tr>
                                 </thead>
@@ -61,11 +62,13 @@
                                         <td> <button type="button" class="btn btn-success addProduto">Add Produto</button></td>
                                         <td> </td>
                                         <td> </td>
+                                        <td> </td>
                                     </tr>
                                 </tbody>
                                 <tfoot style="background-color: #ddd;">
                                     <tr>
                                         <th scope = "col" >Total</th>
+                                        <td scope = "col">  </td>
                                         <td scope = "col">  </td>
                                         <td scope = "col">  </td>
                                         <td id="total" scope = "col"> R$ 0,00 </td>
@@ -85,12 +88,14 @@
                 function alteraQuant(){
                     $('.maisQuant').click(function(){
                         var tr = $(this).closest('tr').attr('row');
-                        $('#quantidade'+tr).val(parseInt($('#quantidade'+tr).val())+1);
+                        var td = $(this).closest('td').attr('tipo');
+                        $('#'+td+tr).val(parseInt($('#'+td+tr).val())+1);
                     });
 
                     $('.menosQuant').click(function(){
                         var tr = $(this).closest('tr').attr('row');
-                        $('#quantidade'+tr).val(parseInt($('#quantidade'+tr).val())-1);
+                        var td = $(this).closest('td').attr('tipo');
+                        $('#'+td+tr).val(parseInt($('#'+td+tr).val())-1);
                     });
                 };
 
@@ -109,6 +114,11 @@
                 };
 
                 $(document).ready(function(){
+                    @foreach ($comandas as $comanda)
+                        @if($comanda->table)
+                            $("#mesa option[value='{{ $comanda->table->id }}']").remove();
+                        @endif
+                    @endforeach
                     alteraQuant();
                     alteraTotais();
                 });
@@ -119,11 +129,16 @@
                             var html = "<tr row='{{ $product->id }}'>"
                                     +     "<th> <input type='text' class='hidden' name='product_id{{ $product->id }}' value='{{ $product->id }}'></input>{{ $product->name }} </th>"
                                     +     "<td> R$ {{ $product->value }}</td>"
-                                    +     '<td valor="{{ $product->value }}">'
+                                    +     '<td tipo="quantidade" valor="{{ $product->value }}">'
                                     +                '<button type="button" style=" font-size: 10px; padding: 5px; margin-right: 9px;" class="menosQuant quant btn btn-danger"><i class="fa-solid fa-minus"></i></button>'
                                     +                '<input style=" background-color: transparent; width: 50px; " type="text" id="quantidade{{ $product->id }}" name="quantity{{ $product->id }}" value="1"></input>'
                                     +                '<button type="button" style=" font-size: 10px; padding: 5px; margin-left: 9px;" class="maisQuant quant btn btn-success"><i class="fa-solid fa-plus"></i></button>'
                                     +            '</td>'
+                                    +     '<td tipo="total">' 
+                                    +        '<button type="button" style=" font-size: 10px; padding: 5px; margin-right: 5px;" class="menosQuant btn btn-danger"><i class="fa-solid fa-minus"></i></button>'
+                                    +        '<input style=" background-color: transparent; width: 50px; " type="text" id="total{{ $product->id }}" name="delivered{{ $product->id }}" value="0"></input>'
+                                    +        '<button type="button" style=" font-size: 10px; padding: 5px; margin-left: 5px;" class="maisQuant btn btn-success"><i class="fa-solid fa-plus"></i></button>'
+                                    +     '</td>'
                                     +     "<td> <span id='valor{{ $product->id }}' >R$ <span>{{ $product->value }}</span></span> </td>"
                                     + "</tr>"
                         }

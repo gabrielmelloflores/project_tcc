@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         Product::factory(50)->create();
         Table::factory(10)->create();
-        Comanda::factory(10)->create();
+        //Comanda::factory(10)->create();
         ComandaItem::factory(20)->create();
 
         // \App\Models\User::factory(10)->create();

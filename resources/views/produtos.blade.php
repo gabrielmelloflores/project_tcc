@@ -284,12 +284,6 @@ $(document).ready(function(){
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="selectAll">
-									<label for="selectAll"></label>
-								</span>
-							</th>
 							<th>Nome</th>
 							<th>Preço</th>
 							<th>Palavra-Chave</th>
@@ -301,12 +295,6 @@ $(document).ready(function(){
 						{{-- @php dd($products); @endphp --}}
 						@foreach ($products as $product)
 							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox{{ $product->id }}" name="options[]" value="{{ $product->id }}">
-										<label for="checkbox{{ $product->id }}"></label>
-									</span>
-								</td>
 								<td>{{ $product->name }}</td>
 								<td>R${{ $product->value }}</td>
 								<td>{{ $product->tag }}</td>

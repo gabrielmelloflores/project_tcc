@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ComandaItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['comanda_id','product_id','quantity'];
+    protected $fillable = ['comanda_id','product_id','delivered','quantity'];
 
     public function comanda() {
         return $this->belongsTo(Comanda::class, 'comanda_id');

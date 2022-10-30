@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('comanda_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
+            $table->integer('delivered');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

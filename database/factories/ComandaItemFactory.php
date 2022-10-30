@@ -21,7 +21,8 @@ class ComandaItemFactory extends Factory
         return [
             'comanda_id' => Comanda::factory(),
             'product_id' => Product::factory(),
-            'quantity' => $this->faker->randomNumber(1),
+            'quantity'   => $this->faker->randomNumber(1),
+            'delivered'  => 0
         ];
     }
 }
