@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Table;
+use App\Models\Comanda;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
@@ -9,7 +10,8 @@ class TableController extends Controller
     public function index()
     {
         return view('mesas',[
-            'tables' => Table::all()
+            'tables' => Table::all(),
+            'comandas' => Comanda::all(),
         ]);
     }
 

@@ -15,7 +15,11 @@
                 @if($table->active == 0)
                     <div id="{{ $table->id }}" class="card mb-3" style="max-width: 240px; min-width:100px; display:inline-flex; background-color: #9e9e9e; cursor: pointer;">
                 @else
-                    <div id="{{ $table->id }}" class="card mb-3" style="max-width: 240px; min-width:100px; display:inline-flex; background-color: white; cursor: pointer;">
+                    @if($table->anexo)
+                        <div id="{{ $table->id }}" class="card mb-3 bg-danger" style="max-width: 240px; min-width:100px; display:inline-flex; cursor: pointer;">
+                    @else
+                        <div id="{{ $table->id }}" class="card mb-3 bg-success" style="max-width: 240px; min-width:100px; display:inline-flex; cursor: pointer;">
+                    @endif
                 @endif
                     <div class="g-0" style="display: flex;">
                         <div class="col-md-4" style="border-right: 1px solid #ddd; display: flex; min-width:75px;">
@@ -114,20 +118,27 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
+                               
+                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                                <button class="btn btn-success">Salvar</button>
+                        </form>
+
                                 <form id="delet" method="POST" action="">
                                     @csrf
                                     @method('DELETE')
 
                                     <button class="delete" style="color: rgb(243, 47, 47); position: absolute; left: 5px;"><i class="material-icons" data-toggle="tooltip" title="Delete">Deletar</button>
                                 </form>
-                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                                <button class="btn btn-success">Salvar</button>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
-
+            <script>
+                @foreach($comandas as $comanda)
+                    $("#{{$comanda->table_id}}").removeClass('bg-success');
+                    $("#{{$comanda->table_id}}").addClass('bg-danger');
+                @endforeach
+            </script>
         </x-slot>
     </x-sidebar>
 </x-app-layout>

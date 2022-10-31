@@ -106,16 +106,17 @@
 
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <!--<form method="DELETE" action="/comanda/{{ $comanda->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-primary">Encerrar Comanda</button>
-                        </form>-->
+                    <div class="modal-footer"> 
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                        <button class="btn btn-success">Salvar</button>
-                    </div>
+                        <button class="btn btn-success">Salvar</button>  
                 </form>                
+                        <form method="POST" action="/comanda/{{ $comanda->id }}">
+                            @csrf
+						    @method('DELETE')
+
+                            <button class="btn btn-primary">Encerrar Comanda</button>
+                        </form>
+                    </div>
 
             </div>
             <script>
