@@ -165,6 +165,7 @@
                     console.log('Ready');
                     alteraQuant();
                     alteraTotais();
+                    $( '.quant' ).trigger( "click" );
                 });
 
                 $('.addProduto').click(function(){
@@ -193,6 +194,7 @@
                     $('.quant').unbind();
                     alteraQuant();
                     alteraTotais();
+                    $( '.quant' ).trigger( "click" );
 
                 });
 

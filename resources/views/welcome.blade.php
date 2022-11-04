@@ -14,7 +14,7 @@
     <!-- Estilo customizado -->
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
 
-    <title>Finans - finanças pessoais</title>
+    <title>Comandas - controle suas comandas</title>
   </head>
   <style>
     #home {

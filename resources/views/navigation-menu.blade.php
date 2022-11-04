@@ -10,7 +10,6 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

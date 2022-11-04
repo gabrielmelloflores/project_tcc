@@ -15,6 +15,11 @@
 
         <!-- Styles -->
         @livewireStyles
+        <style>
+            .active{
+                background-color:#ffc107 !important;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
