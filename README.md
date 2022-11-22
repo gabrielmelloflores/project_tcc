@@ -1,15 +1,15 @@
 <p>Instrussão de uso:</p>
-Requisitos:
-    PHP: 8.0^
-    Node: 16^ 
-    Composer: 2.4 
-    Laravel: 9
+<p>Requisitos:</p>
+    <p>PHP: 8.0^</p>
+    <p>Node: 16^</p> 
+    <p>Composer: 2.4</p>
+    <p>Laravel: 9</p>
 
-Após download do código
-    composer install -> irá criar a pasta vendor no projeto
-    cp .env.example .env & php artisan key:generate -> Irá cria o .env (aonde você irá definir o banco de dados e o nome dele, assim como login e senha)
-    npm install & npm run build 
+<p>Após download do código</p>
+    <p>composer install -> irá criar a pasta vendor no projeto</p>
+    <p>cp .env.example .env & php artisan key:generate -> Irá cria o .env (aonde você irá definir o banco de dados e o nome dele, assim como login e senha)</p>
+    <p>npm install & npm run build</p> 
 
-Comandos especificos
-    php artisan migrate --seed -> Cria as tabelas no banco e popula com dados ficticios
-    php artisan serve -> Cria um servidor para acessar o site
+<p>Comandos especificos</p>
+    <p>php artisan migrate --seed -> Cria as tabelas no banco e popula com dados ficticios</p>
+    <p>php artisan serve -> Cria um servidor para acessar o site</p>
