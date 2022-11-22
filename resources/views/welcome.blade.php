@@ -64,7 +64,7 @@
             <div class="align-self-center">
               <h1 class="display-4">Controle suas comandas</h1>
               <p>
-                o Finans é uma ferramenta online que vai facilitar o controle do seu restaurante.
+                o IComanda é uma ferramenta online que vai facilitar o controle do seu restaurante.
               </p>
 
               <form class="mt-4 mb-4">
@@ -72,15 +72,6 @@
                     <button class="btn btn-primary w-100" type="button">Cadastre-se</button>
                 </div>
               </form>
-
-              <p>Disponível para
-                <a href="" class="btn btn-outline-light">
-                  <i class="fab fa-android fa-lg"></i>
-                </a>
-                <a href="" class="btn btn-outline-light">
-                  <i class="fab fa-apple"></i>
-                </a>
-              </p>
 
             </div>
           </div><!--/fim textos da seção -->
@@ -98,7 +89,7 @@
             <div class="align-self-center">
               <h2>Simples, Rápido e Fácil de Usar</h2>
               <p>
-                O Finans é um sistema para controle operacional e gerencial de bares, restaurantes e similares. Com ele você tem controle de comandas, mesas e produtos. 
+                O IComanda é um sistema para controle operacional e gerencial de bares, restaurantes e similares. Com ele você tem controle de comandas, mesas e produtos. 
               </p>
               <a href="" class="btn btn-primary">Veja mais</a>
             </div>
@@ -118,9 +109,9 @@
           </div>
           <div class="col-md-6 d-flex">
             <div class="align-self-center">
-              <h2>Pare de pagar juros e economize</h2>
+              <h2>Controle melhor suas comandas</h2>
               <p>
-                Manter as contas em dia é sempre um problema? O Finans avisa você: receba alertas de contas a pagar e a receber!
+                Com o IComanda você consegue controlar melhor suas comandas e deixa de perder dinheiro!
               </p>
               <a href="" class="btn btn-primary">Veja mais</a>
             </div>
@@ -136,7 +127,7 @@
             <img src="img/facil.png" class="img-fluid">
             <h4>Fácil de usar</h4>
             <p>
-              O Finans vai além do básico e permite que você faça controles incríveis, essenciais para seu estabelecimento. Simples como tem que ser!
+              O IComanda vai além do básico e permite que você faça controles incríveis, essenciais para seu estabelecimento. Simples como tem que ser!
             </p>
           </div>
           <div class="col-md-4">
