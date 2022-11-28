@@ -18,9 +18,11 @@ class ComandaItemFactory extends Factory
      */
     public function definition()
     {
+        $comandasIDs = Comanda::all()->pluck('id')->toArray();
+        $productsIDs= Product::all()->pluck('id')->toArray();
         return [
-            'comanda_id' => Comanda::factory(),
-            'product_id' => Product::factory(),
+            'comanda_id' => $this->faker->randomElement($comandasIDs),
+            'product_id' => $this->faker->randomElement($productsIDs),
             'quantity'   => $this->faker->randomNumber(1),
             'delivered'  => 0
         ];
