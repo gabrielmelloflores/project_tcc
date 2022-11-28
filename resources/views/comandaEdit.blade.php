@@ -114,7 +114,7 @@
                             @csrf
 						    @method('DELETE')
 
-                            <button class="btn btn-primary">Encerrar Comanda</button>
+                            <button id="encerrarComanda" class="btn btn-primary">Encerrar Comanda</button>
                         </form>
                     </div>
 
@@ -149,11 +149,29 @@
                         $('tbody tr td:last-child span span').each(function( index ) {
                             soma += parseFloat($(this)[0].innerText);
                         });
-                        console.log('Soma: '+soma);
                         $('#total').html('R$ '+soma);
                     });
                 };
 
+                function encerrarComanda(){
+                    $('#encerrarComanda').click(function(){
+                        var soma = $('#total')[0].innerText;
+                        const myArray = soma.split(" ");
+                        let word = myArray[1];
+                        var json = {
+                                "comanda_id": "{{$comanda->id}}", 
+                                @foreach ($comanda->itens as $item)
+                                    "product_{{ $item->product->id }}": {
+                                        "quantity"  : {{ $item->quantity }},
+                                        "valueUnit" : {{ $item->product->value }},
+                                    },
+                                @endforeach
+                                "total": word ,
+                            }; 
+                        alert("Comanda Encerrada \n"+JSON.stringify(json));
+                    });
+                };
+            
                 $(document).ready(function(){
                     @foreach ($comandas as $comanda1)
                         @if($comanda1->table)
@@ -165,6 +183,7 @@
                     console.log('Ready');
                     alteraQuant();
                     alteraTotais();
+                    encerrarComanda();
                     $( '.quant' ).trigger( "click" );
                 });
 
