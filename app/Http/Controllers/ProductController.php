@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('produtos',[
-            'products' => Product::latest()->paginate(10)->withQueryString()
+            'products' => Product::latest()->paginate(5)->withQueryString()
         ]);
     }
 

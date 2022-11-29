@@ -59,6 +59,13 @@ class DatabaseSeeder extends Seeder
             'prepare' => '5'
          ]);
 
+         Product::factory()->create([
+            'name'    => 'X-Tudo',
+            'value'   => 20,
+            'tag'     => 'xis', 
+            'prepare' => '20'
+         ]);
+
         ComandaItem::factory(20)->create();
 
     }
