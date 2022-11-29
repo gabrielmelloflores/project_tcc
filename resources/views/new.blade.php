@@ -149,6 +149,7 @@
                     $('.quant').unbind();
                     alteraQuant();
                     alteraTotais();
+                    $( '.quant' ).trigger( "click" );
 
                 });
 

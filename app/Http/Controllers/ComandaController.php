@@ -103,6 +103,11 @@ class ComandaController extends Controller
         $produtos = ComandaItem::where([
             ['comanda_id', '=', $comanda->id],
         ]);
+
+        $tables = Table::select('select t.* from tables t left join comandas c on t.anexo = c.table_id where c.id = '.$comanda->id);
+        
+        $tables->update(['anexo' => NULL]);
+
         $produtos->delete();
 
         $comanda->delete();

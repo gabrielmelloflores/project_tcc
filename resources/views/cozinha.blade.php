@@ -9,28 +9,42 @@
         <x-slot name="content">
         <div class="m-3">
 
-            @foreach ($comandas as $comanda)
-                <!-- Row 1 -->
-  <div class="m-1 md:w-1/4 flex flex-col flex-grow flex-shrink inline-flex">
-
-      <div class="card ">
-        <div class="card-body">
-          <h5 class="card-title">Comanda - {{$comanda->id}}</h5>
-          <ul class="list-group">
+        @foreach ($comandas as $comanda)
+            <!-- Row 1 -->
+            @php 
+                    $quantidade = 0; 
+                    $delivered = 0;
+            @endphp
             @foreach ($comanda->itens as $item)
-                <li class="list-group-item list-group-item-success">{{ $item->quantity}} - {{ $item->product->name }}</li>
+                @php 
+                    $quantidade += $item->quantity; 
+                    $delivered += $item->delivered;
+                @endphp
             @endforeach
-          </ul>
-        </div>
-        <div class="card-footer">
-            <time>{{ $comanda->created_at}}</time>
-        </div>
-      </div>
-      </div>
-      
-            @endforeach
+                @if($quantidade != $delivered)
+                    
+            
+                    <div class="m-1 md:w-1/4 flex flex-col flex-grow flex-shrink inline-flex">
 
-        </div>
+                        <div class="card ">
+                            <div class="card-body">
+                            <h5 class="card-title">Comanda - {{$comanda->id}}</h5>
+                            <ul class="list-group">
+                                @foreach ($comanda->itens as $item)
+                                    @if(($item->quantity - $item->delivered) > 0)
+                                        <li class="list-group-item list-group-item-success">@php echo($item->quantity - $item->delivered); @endphp - {{ $item->product->name }}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                            </div>
+                            <div class="card-footer">
+                                <time>{{ $comanda->created_at}}</time>
+                            </div>
+                        </div>
+                        </div>
+                        @endif
+            @endforeach
+            </div>
         </x-slot>
     </x-sidebar>
 </x-app-layout>

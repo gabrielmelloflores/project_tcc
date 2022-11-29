@@ -149,6 +149,7 @@
                         $('tbody tr td:last-child span span').each(function( index ) {
                             soma += parseFloat($(this)[0].innerText);
                         });
+                        console.log('Soma'+ soma);
                         $('#total').html('R$ '+soma);
                     });
                 };
